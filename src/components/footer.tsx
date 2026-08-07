@@ -1,6 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
-import { ShieldAlert, ExternalLink } from 'lucide-react';
+import { ShieldAlert, ExternalLink, Heart } from 'lucide-react';
 
 export function Footer() {
   return (
@@ -87,6 +87,11 @@ export function Footer() {
                 </Link>
               </li>
               <li>
+                <Link href="/upcoming" className="hover:text-sky-400 transition-colors">
+                  Upcoming SEBI Filings
+                </Link>
+              </li>
+              <li>
                 <Link href="/compare" className="hover:text-emerald-400 transition-colors">
                   Side-by-Side Comparison Tool
                 </Link>
@@ -115,9 +120,15 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-4 border-t border-slate-800/80 text-[11px] text-slate-500">
+        <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-4 border-t border-slate-800/80 text-[11px] text-slate-400">
           <div>© {new Date().getFullYear()} IPO Insight India. Open Source & Pure Static Web Architecture.</div>
-          <div>Auto-deployed via GitHub Actions to GitHub Pages</div>
+          <div className="flex items-center gap-1.5">
+            <span>Made with</span>
+            <Heart className="w-3.5 h-3.5 text-rose-500 fill-rose-500 inline-block animate-pulse" />
+            <span>by <strong className="text-slate-200 font-bold">Akash</strong></span>
+            <span className="mx-1 text-slate-600">•</span>
+            <span className="text-slate-400">Auto-deployed via GitHub Actions to GitHub Pages</span>
+          </div>
         </div>
       </div>
     </footer>
