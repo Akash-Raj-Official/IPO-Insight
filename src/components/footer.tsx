@@ -126,8 +126,6 @@ export function Footer() {
             <span>Made with</span>
             <Heart className="w-3.5 h-3.5 text-rose-500 fill-rose-500 inline-block animate-pulse" />
             <span>by <strong className="text-slate-200 font-bold">Akash</strong></span>
-            <span className="mx-1 text-slate-600">•</span>
-            <span className="text-slate-400">Auto-deployed via GitHub Actions to GitHub Pages</span>
           </div>
         </div>
       </div>
