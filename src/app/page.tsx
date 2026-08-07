@@ -14,6 +14,7 @@ import {
   List,
   ExternalLink,
   FileText,
+  Calendar,
 } from 'lucide-react';
 
 export default function DashboardPage() {
@@ -97,7 +98,14 @@ export default function DashboardPage() {
             </p>
           </div>
 
-          <div className="flex items-center gap-3">
+          <div className="flex flex-wrap items-center gap-3">
+            <Link
+              href="/upcoming"
+              className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-gradient-to-r from-sky-500 to-cyan-400 hover:from-sky-400 hover:to-cyan-300 text-slate-950 font-extrabold text-xs sm:text-sm shadow-lg shadow-sky-500/20 transition-all"
+            >
+              <Calendar className="w-4 h-4" />
+              <span>Upcoming SEBI IPOs</span>
+            </Link>
             <Link
               href="/compare"
               className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-extrabold text-xs sm:text-sm shadow-lg shadow-emerald-500/20 transition-all"

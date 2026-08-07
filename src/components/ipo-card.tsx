@@ -12,15 +12,15 @@ export function IPOCard({ ipo }: IPOCardProps) {
   const getStatusBadge = (status: string) => {
     switch (status) {
       case 'OPEN':
-        return 'bg-emerald-500/10 text-emerald-400 border-emerald-500/30 animate-pulse';
+        return 'bg-emerald-500/20 text-emerald-300 border-emerald-400/50 shadow-[0_0_12px_rgba(16,185,129,0.25)] animate-pulse';
       case 'UPCOMING':
-        return 'bg-sky-500/10 text-sky-400 border-sky-500/30';
+        return 'bg-sky-500/20 text-sky-300 border-sky-400/50 shadow-[0_0_12px_rgba(14,165,233,0.25)]';
       case 'CLOSED':
-        return 'bg-amber-500/10 text-amber-400 border-amber-500/30';
+        return 'bg-amber-500/20 text-amber-300 border-amber-400/50';
       case 'LISTED':
-        return 'bg-purple-500/10 text-purple-400 border-purple-500/30';
+        return 'bg-purple-500/20 text-purple-300 border-purple-400/50 shadow-[0_0_12px_rgba(168,85,247,0.25)]';
       default:
-        return 'bg-slate-500/10 text-slate-400 border-slate-500/30';
+        return 'bg-slate-500/20 text-slate-300 border-slate-500/40';
     }
   };
 
@@ -30,35 +30,46 @@ export function IPOCard({ ipo }: IPOCardProps) {
     return d.toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' });
   };
 
+  // Ensure logo initials never overflow the square box
+  const rawInitials = (ipo.logoInitials || ipo.companyName.substring(0, 3)).trim();
+  const displayInitials = rawInitials.length > 3 ? rawInitials.slice(0, 3) : rawInitials;
+
   return (
-    <div className="group relative flex flex-col justify-between p-5 rounded-2xl bg-slate-900/80 border border-slate-800/90 hover:border-emerald-500/40 hover:shadow-2xl hover:shadow-emerald-500/5 transition-all duration-300">
+    <div className="group relative flex flex-col justify-between p-5 rounded-2xl bg-gradient-to-b from-slate-900/95 via-slate-950 to-slate-900/95 border border-slate-800/90 hover:border-emerald-500/50 hover:shadow-[0_0_30px_rgba(16,185,129,0.12)] transition-all duration-300">
       <div className="flex flex-col gap-4">
         {/* Header row */}
         <div className="flex items-start justify-between gap-3">
-          <div className="flex items-center gap-3">
-            <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-slate-800 to-slate-950 border border-slate-700/80 flex items-center justify-center font-bold text-lg text-emerald-400 shadow-inner group-hover:scale-105 transition-transform">
-              {ipo.logoInitials}
+          <div className="flex items-start gap-3 min-w-0 flex-1">
+            <div className="w-11 h-11 sm:w-12 sm:h-12 rounded-xl bg-gradient-to-br from-emerald-500/20 via-slate-900 to-slate-950 border border-emerald-500/30 flex items-center justify-center text-emerald-400 shadow-inner group-hover:scale-105 group-hover:border-emerald-400/60 transition-all shrink-0 overflow-hidden select-none p-1 text-center">
+              <span
+                className={`truncate max-w-full block leading-none ${
+                  displayInitials.length >= 3 ? 'text-xs font-black tracking-tight' : 'text-sm font-extrabold'
+                }`}
+              >
+                {displayInitials}
+              </span>
             </div>
-            <div>
+            <div className="min-w-0 flex-1">
               <Link
                 href={`/ipo/${ipo.id}`}
-                className="font-bold text-base text-slate-100 hover:text-emerald-400 transition-colors line-clamp-1"
+                className="font-extrabold text-sm sm:text-base text-slate-100 hover:text-emerald-400 transition-colors line-clamp-2 leading-snug block"
+                title={ipo.companyName}
               >
                 {ipo.companyName}
               </Link>
-              <div className="flex items-center gap-2 mt-0.5 text-xs text-slate-400">
-                <span className="flex items-center gap-1">
-                  <Building2 className="w-3 h-3 text-slate-500" />
-                  {ipo.sector}
+              <div className="flex items-center gap-1.5 mt-1 text-xs text-slate-400">
+                <span className="flex items-center gap-1 min-w-0 truncate">
+                  <Building2 className="w-3.5 h-3.5 text-slate-500 shrink-0" />
+                  <span className="truncate">{ipo.sector}</span>
                 </span>
-                <span>•</span>
-                <span className="font-medium text-slate-300">{ipo.exchangeType}</span>
+                <span className="shrink-0">•</span>
+                <span className="font-semibold text-slate-300 shrink-0">{ipo.exchangeType}</span>
               </div>
             </div>
           </div>
 
           <span
-            className={`text-[11px] font-bold px-2.5 py-1 rounded-full border uppercase tracking-wider ${getStatusBadge(
+            className={`shrink-0 text-[10px] sm:text-[11px] font-black px-2.5 py-1 rounded-full border uppercase tracking-wider ${getStatusBadge(
               ipo.status
             )}`}
           >

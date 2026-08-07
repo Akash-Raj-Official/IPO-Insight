@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { TrendingUp, BarChart3, ArrowLeftRight, Info, ShieldCheck } from 'lucide-react';
+import { TrendingUp, BarChart3, ArrowLeftRight, Info, ShieldCheck, Calendar } from 'lucide-react';
 
 export function Navbar() {
   const pathname = usePathname();
@@ -11,6 +11,7 @@ export function Navbar() {
 
   const navItems = [
     { name: 'Dashboard', href: '/', icon: BarChart3 },
+    { name: 'Upcoming SEBI IPOs', href: '/upcoming', icon: Calendar },
     { name: 'Compare IPOs', href: '/compare', icon: ArrowLeftRight },
     { name: 'Market Analytics', href: '/analytics', icon: TrendingUp },
     { name: 'Data & Methodology', href: '/about', icon: Info },

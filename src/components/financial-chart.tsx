@@ -87,6 +87,7 @@ export function FinancialChart({ financials }: FinancialChartProps) {
               <XAxis dataKey="year" stroke="#64748b" fontSize={12} tickLine={false} />
               <YAxis stroke="#64748b" fontSize={11} tickLine={false} tickFormatter={(v) => `${v}`} />
               <Tooltip
+                cursor={{ fill: 'transparent' }}
                 contentStyle={{
                   backgroundColor: '#090d16',
                   borderColor: '#334155',
@@ -113,6 +114,7 @@ export function FinancialChart({ financials }: FinancialChartProps) {
               <XAxis dataKey="year" stroke="#64748b" fontSize={12} tickLine={false} />
               <YAxis stroke="#64748b" fontSize={11} tickLine={false} />
               <Tooltip
+                cursor={{ stroke: 'rgba(255, 255, 255, 0.2)', strokeWidth: 1, strokeDasharray: '3 3' }}
                 contentStyle={{
                   backgroundColor: '#090d16',
                   borderColor: '#334155',
@@ -143,6 +145,7 @@ export function FinancialChart({ financials }: FinancialChartProps) {
               <XAxis dataKey="year" stroke="#64748b" fontSize={12} tickLine={false} />
               <YAxis stroke="#64748b" fontSize={11} tickLine={false} />
               <Tooltip
+                cursor={{ stroke: 'rgba(255, 255, 255, 0.2)', strokeWidth: 1, strokeDasharray: '3 3' }}
                 contentStyle={{
                   backgroundColor: '#090d16',
                   borderColor: '#334155',
