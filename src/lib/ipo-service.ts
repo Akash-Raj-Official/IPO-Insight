@@ -1,7 +1,21 @@
 import ipoData from '@/data/ipos.json';
 import { IPO, IPOFilters, MarketStats } from '@/types/ipo';
 
-const typedIPOs: IPO[] = ipoData as unknown as IPO[];
+function deriveScore(ipo: IPO): IPO {
+  // Compute total score as the sum of all breakdown pillars
+  const computedScore = Object.values(ipo.scoreBreakdown).reduce((a, b) => a + b, 0);
+
+  // Derive label and colour bands from the computed total
+  let suitabilityColor: IPO['suitabilityColor'];
+  if (computedScore >= 80) suitabilityColor = 'green';
+  else if (computedScore >= 65) suitabilityColor = 'yellow';
+  else if (computedScore >= 50) suitabilityColor = 'orange';
+  else suitabilityColor = 'red';
+
+  return { ...ipo, suitabilityScore: computedScore, suitabilityColor };
+}
+
+const typedIPOs: IPO[] = (ipoData as unknown as IPO[]).map(deriveScore);
 
 export function getAllIPOs(): IPO[] {
   return typedIPOs;

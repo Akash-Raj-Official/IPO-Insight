@@ -144,14 +144,19 @@ export function IPOCard({ ipo }: IPOCardProps) {
           </div>
         )}
 
-        {/* Date Row */}
-        <div className="flex items-center justify-between text-xs text-slate-400 pt-1">
+        {/* Date Row + Data Source badge */}
+        <div className="flex items-center justify-between text-xs text-slate-400 pt-1 gap-2">
           <span className="flex items-center gap-1 text-[11px]">
             <Calendar className="w-3 h-3 text-slate-500" />
             {ipo.status === 'LISTED'
               ? `Listed on ${formatDate(ipo.listingDate)}`
               : `Bidding: ${formatDate(ipo.openDate)} - ${formatDate(ipo.closeDate)}`}
           </span>
+          {ipo.dataSource === 'illustrative' && (
+            <span className="shrink-0 text-[9px] font-bold px-1.5 py-0.5 rounded-full bg-amber-500/10 text-amber-400 border border-amber-500/25 uppercase tracking-wide">
+              Sample Data
+            </span>
+          )}
         </div>
       </div>
 

@@ -114,6 +114,7 @@ export interface IPO {
   isProfitable: boolean;
   financials: FinancialData;
   ratios: FinancialRatios;
+  dataSource: 'verified' | 'illustrative';
   suitabilityScore: number;
   suitabilityLabel: string;
   suitabilityColor: 'green' | 'yellow' | 'orange' | 'red';

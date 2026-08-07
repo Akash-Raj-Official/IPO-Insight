@@ -87,14 +87,16 @@ export default function DashboardPage() {
           <div className="flex flex-col gap-2 max-w-2xl">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-xs font-semibold self-start">
               <Sparkles className="w-3.5 h-3.5" />
-              <span>SEBI & Exchange Data Verified</span>
+              <span>SEBI Filings Referenced</span>
             </div>
             <h1 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
               Indian IPO Intelligence & Analysis
             </h1>
             <p className="text-sm sm:text-base text-slate-400 leading-relaxed">
-              Real public data compiled from SEBI Red Herring Prospectuses (RHPs), BSE, and NSE. 
-              Track financial health, valuation ratios, oversubscription rates, and risk scores.
+              Compiled from SEBI Red Herring Prospectuses (RHPs), BSE, and NSE filings.
+              Verified entries use actual filing data; illustrative entries use representative financial
+              profiles for demonstration. Track financial health, valuation ratios, oversubscription
+              rates, and risk scores.
             </p>
           </div>
 
@@ -165,7 +167,7 @@ export default function DashboardPage() {
               {stats.mainboardCount} <span className="text-xs text-slate-400 font-normal">Mainboard</span> / {stats.smeCount}{' '}
               <span className="text-xs text-slate-400 font-normal">SME</span>
             </div>
-            <div className="text-[10px] text-sky-400 mt-0.5">Direct SEBI/BSE filings</div>
+            <div className="text-[10px] text-sky-400 mt-0.5">SEBI/BSE Referenced</div>
           </div>
         </div>
       </section>

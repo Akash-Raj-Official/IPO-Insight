@@ -7,6 +7,7 @@ import { SubscriptionBadge } from '@/components/subscription-badge';
 import { TimelineProgress } from '@/components/timeline-progress';
 import { FinancialChart } from '@/components/financial-chart';
 import { RiskAnalysis } from '@/components/risk-analysis';
+import { SCORING_PILLARS } from '@/lib/scoring-pillars';
 import {
   Building2,
   ExternalLink,
@@ -18,6 +19,7 @@ import {
   Users,
   PieChart,
   Award,
+  BarChart2,
 } from 'lucide-react';
 
 interface PageProps {
@@ -127,9 +129,16 @@ export default async function IPODetailPage({ params }: PageProps) {
         {/* Suitability Score Summary */}
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-4 rounded-2xl bg-slate-950/80 border border-slate-800">
           <div>
-            <span className="text-[11px] text-slate-400 font-semibold uppercase tracking-wider block">
-              Analytical Suitability Score
-            </span>
+            <div className="flex items-center gap-2 mb-1">
+              <span className="text-[11px] text-slate-400 font-semibold uppercase tracking-wider">
+                Analytical Suitability Score
+              </span>
+              {ipo.dataSource === 'illustrative' && (
+                <span className="text-[9px] font-bold px-1.5 py-0.5 rounded-full bg-amber-500/10 text-amber-400 border border-amber-500/25 uppercase tracking-wide">
+                  Sample Data
+                </span>
+              )}
+            </div>
             <div className="mt-1">
               <SuitabilityBadge
                 score={ipo.suitabilityScore}
@@ -143,8 +152,51 @@ export default async function IPODetailPage({ params }: PageProps) {
 
           <div className="text-xs text-slate-400 max-w-md">
             SEBI Observation Status:{' '}
-            <strong className="text-emerald-400">{ipo.sebiStatus}</strong>. Score compiled from 7
-            financial health factors: profitability, cash flow consistency, leverage, and valuation metrics.
+            <strong className="text-emerald-400">{ipo.sebiStatus}</strong>. Score derived from the
+            7-pillar breakdown below — profitability, cash flow, leverage, valuation, dilution &amp;
+            governance. See the{' '}
+            <Link href="/about" className="text-sky-400 hover:underline">About page</Link>{' '}for full methodology.
+          </div>
+        </div>
+
+        {/* Score Breakdown by Pillar */}
+        <div className="flex flex-col gap-3 p-4 rounded-2xl bg-slate-950/60 border border-slate-800">
+          <h3 className="text-xs font-bold text-slate-300 flex items-center gap-2 uppercase tracking-wider">
+            <BarChart2 className="w-3.5 h-3.5 text-indigo-400" />
+            Score Breakdown by Pillar
+          </h3>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-3">
+            {SCORING_PILLARS.map((pillar) => {
+              const raw = ipo.scoreBreakdown[pillar.key as keyof typeof ipo.scoreBreakdown] ?? 0;
+              const pct = Math.round((raw / pillar.maxScore) * 100);
+              return (
+                <div key={pillar.key}>
+                  <div className="flex items-center justify-between text-[11px] mb-1">
+                    <span className="text-slate-300 font-medium">{pillar.name}</span>
+                    <span className={`font-black tabular-nums ${pillar.colour}`}>
+                      {raw}
+                      <span className="text-slate-500 font-normal">/{pillar.maxScore}</span>
+                    </span>
+                  </div>
+                  <div className="h-1.5 rounded-full bg-slate-800 overflow-hidden">
+                    <div
+                      className="h-full rounded-full transition-all duration-500"
+                      style={{
+                        width: `${pct}%`,
+                        background: pillar.colour
+                          .replace('text-emerald-400', '#34d399')
+                          .replace('text-sky-400', '#38bdf8')
+                          .replace('text-indigo-400', '#818cf8')
+                          .replace('text-violet-400', '#a78bfa')
+                          .replace('text-amber-400', '#fbbf24')
+                          .replace('text-orange-400', '#fb923c')
+                          .replace('text-rose-400', '#fb7185'),
+                      }}
+                    />
+                  </div>
+                </div>
+              );
+            })}
           </div>
         </div>
       </section>
